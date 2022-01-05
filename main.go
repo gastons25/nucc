@@ -1,5 +1,5 @@
 package main
 
 func main () {
-	println("Hello Nuri")
+	println("Hello Nuri v1.00.00")
 }
