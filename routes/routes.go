@@ -2,7 +2,6 @@ package routes
 
 import (
 	"gastonstec/nuricc/handlers"
-
 	"github.com/gofiber/fiber/v2"
 )
 

@@ -11,27 +11,35 @@ import (
 	"github.com/gastonstec/utils"
 )
 
-const HTTP_TIMEOUT = 15
+const( 
+    HTTP_TIMEOUT = 15
+    HTTP_STATUSOK = 200
+)
 
 
 func GetBlockInfo(networkCode string, blockHash string) (string, error) {
 	var err error
 
-	uri:= "https://sochain.com/api/v2/get_block/" + networkCode + "/" + blockHash
+    // Validate network code
 
+    // Call get_block api
+	uri:= "https://sochain.com/api/v2/get_block/" + networkCode + "/" + blockHash
     client := &http.Client{Timeout: HTTP_TIMEOUT * time.Second,}
     response, err := client.Get(uri)
     if err != nil {
 		return "", errors.New(utils.GetFunctionName() + ": The HTTP request failed with " + err.Error())
     } 
+
 	
 	data, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		return "", errors.New(utils.GetFunctionName() + ": Reading body failed with " + err.Error())
     }
 
-    println(string(data))
-
+    if response.StatusCode != HTTP_STATUSOK {
+        println(string(data))
+        return "", errors.New(utils.GetFunctionName() + ": The HTTP request failed with " + string(data))
+    }
 
     // jsonData := map[string]string{"firstname": "Nic", "lastname": "Raboy"}
     // jsonValue, _ := json.Marshal(jsonData)
