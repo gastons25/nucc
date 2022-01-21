@@ -1,3 +1,4 @@
+// Package routes implements the routing settings.
 package routes
 
 import (
@@ -5,8 +6,12 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// Function InitRoutes set the endpoints routes and handlers
 func InitRoutes(app *fiber.App) {
 
-	app.Get("/api/v1/get_block/:network_code/:block_hash", handlers.GetBlock)
+	// Get block route
+	app.Get("/api/v1/block/:network_code/:block_hash", handlers.GetBlock)
+	// Get transaction route
+	app.Get("/api/v1/tx/:network_code/:transaction_id", handlers.GetTx)
 	
 }

@@ -21,17 +21,18 @@ import (
 func main () {
 	var err error
 
+	// Log environment variables
 	log.Println(utils.GetOsEnv())
 	log.Println(utils.GetGolangEnv())
 
-	// Load config file values
+	// Load config file values from .env file
 	err = config.LoadConfig("/", false)
 	if err != nil {
 		log.Println(utils.GetFunctionName() + ": " + err.Error())
 		os.Exit(1)
 	}
 
-	// Open database connection
+	// Open database connection and defer close
 	err = db.OpenDB()
 	if err != nil {
 		log.Println(utils.GetFunctionName() + ": " + err.Error())
@@ -39,7 +40,7 @@ func main () {
 	}
 	defer db.CloseDB()
 
-	// Load memdb
+	// Load in-memory database
 	err = memdb.Load()
 	if err != nil {
 		log.Println(utils.GetFunctionName() + ": " + err.Error())
@@ -48,8 +49,10 @@ func main () {
 	
 	// Create fiber application object
 	app := fiber.New()
-	// enable CORS middleware
-	app.Use(cors.New())
+	app.Use(cors.New()) // enable cors
+
+	// Initialize fiber application routes
+	routes.InitRoutes(app)
 
 	// Catch shutdown application signal
 	c := make(chan os.Signal, 1)
@@ -60,15 +63,12 @@ func main () {
 		err = app.Shutdown()
 	}()
 
-	// Initialize routes
-	routes.InitRoutes(app)
-
 	// Start fiber listening
 	err = app.Listen(config.GetString("APP_PORT"))
 	if err != nil {
 		log.Println(err.Error())
 	}
 
-	// Cleanup tasks
+	// Final cleanup tasks
 
 }
