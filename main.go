@@ -1,3 +1,4 @@
+// Package main implements the main point of entry.
 package main
 
 import (
@@ -18,6 +19,7 @@ import (
 
 )
 
+// Function main handles the initial settings and start
 func main () {
 	var err error
 
@@ -32,7 +34,7 @@ func main () {
 		os.Exit(1)
 	}
 
-	// Open database connection and defer close
+	// Open database connection pool and defer close
 	err = db.OpenDB()
 	if err != nil {
 		log.Println(utils.GetFunctionName() + ": " + err.Error())
@@ -51,7 +53,7 @@ func main () {
 	app := fiber.New()
 	app.Use(cors.New()) // enable cors
 
-	// Initialize fiber application routes
+	// Initialize fiber routes
 	routes.InitRoutes(app)
 
 	// Catch shutdown application signal
@@ -59,7 +61,7 @@ func main () {
 	signal.Notify(c, os.Interrupt)
 	go func() {
 		_ = <-c
-		log.Println("Application shutting down")
+		log.Println("Shutting down application")
 		err = app.Shutdown()
 	}()
 
@@ -70,5 +72,6 @@ func main () {
 	}
 
 	// Final cleanup tasks
+	log.Println("Final tasks")
 
 }

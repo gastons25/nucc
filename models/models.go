@@ -105,7 +105,7 @@ func GetTxInfo(networkCode string, txId string) (*TxInfo, error) {
 
     // Send error if response is not OK
     if response.StatusCode != HTTP_STATUSOK {
-        return nil, errors.New("invalid block hash")
+        return nil, errors.New("invalid transaction id hash")
     }
 
 	 // Read response body

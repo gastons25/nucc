@@ -58,14 +58,20 @@ func GetTx(ctx *fiber.Ctx) error {
 	networkCode := ctx.Params("network_code")
 	txId := ctx.Params("transaction_id")
 
-	// Validate network code
-	netwname, _ := memdb.GetNetwork(networkCode)
-
 	// Validate parameters
-	if netwname == "" || txId == "" {
+	if networkCode == "" || txId == "" {
 		return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"status": STATUS_FAIL,
 			"data": "Invalid parameters",
+		})
+	}
+
+	// Check network code on memdb
+	netwname, _ := memdb.GetNetwork(networkCode)
+	if netwname == "" {
+		return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"status": STATUS_FAIL,
+			"data": "Invalid network code",
 		})
 	}
 
@@ -79,7 +85,7 @@ func GetTx(ctx *fiber.Ctx) error {
 		})	
 	}
 
-		
+	// Response struct	
 	type TxResponse struct {
 		Txid      string `json:"txid"`
 		DateTime  string `json:"datetime"`
@@ -87,9 +93,10 @@ func GetTx(ctx *fiber.Ctx) error {
 		SentValue string `json:"sent_value"`
 	}
 
+	// Fill and send response
 	var txResp TxResponse
 	txResp.Txid = tx.Data.Txid
-	txResp.DateTime = time.Unix(tx.Data.Time, 0).Format("dd-MM-yyyy HH:mm")
+	txResp.DateTime = time.Unix(tx.Data.Time, 0).Format("02-Jan-2006 15:04")
 	txResp.Fee = tx.Data.Fee
 	txResp.SentValue = tx.Data.SentValue
 
