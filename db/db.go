@@ -20,7 +20,6 @@ func OpenDB() error {
 	
 	// create connection
 	var err error = nil
-	
 	DBpool, err = pgxpool.Connect(context.Background(), config.GetString("DBURI"))
 	if err != nil {
 		log.Println(err.Error())

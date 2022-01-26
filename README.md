@@ -1,2 +1,4 @@
 # Gaston Sanchez - Coding Challenge
-my cc
+
+## About the solution
+### djsakjdksajd

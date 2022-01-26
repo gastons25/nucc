@@ -5,14 +5,10 @@ import (
 	"log"
 	"os"
 	"os/signal"
-
-	"github.com/gastonstec/utils/config"
-	"github.com/gastonstec/utils"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-
-
+	"github.com/gastonstec/utils/config"
+	"github.com/gastonstec/utils"
 	"gastonstec/nuricc/db"
 	"gastonstec/nuricc/memdb"
 	"gastonstec/nuricc/routes"

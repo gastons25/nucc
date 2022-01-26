@@ -25,7 +25,7 @@ type BlockInfo struct {
 	  Blockhash         string   `json:"blockhash"`
 	  BlockNo           int      `json:"block_no"`
 	  MiningDifficulty  string   `json:"mining_difficulty"`
-	  Time              int      `json:"time"`
+	  Time              int64    `json:"time"`
 	  Confirmations     int      `json:"confirmations"`
 	  IsOrphan          bool     `json:"is_orphan"`
 	  Txs               []string `json:"txs"`
