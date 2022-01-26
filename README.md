@@ -13,6 +13,6 @@ Application endpoints:
 * To reload in-memory database (post): /api/v1/admin/memdb/reload
 
 Missing things:
-Unit testing artifacts
-Modular testing using Postman or Katalon
-In-memory caching for blocks and transactions calls using allegro/bigcache
+* Unit testing artifacts
+* Modular testing using Postman or Katalon
+* In-memory caching for blocks and transactions calls using allegro/bigcache
