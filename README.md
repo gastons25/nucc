@@ -1,13 +1,18 @@
 # Gaston Sanchez - Coding Challenge
 
 ## About the solution
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+The application implementation uses the following libraries:
+* gofiber/fiber as a web framework
+* jackc/pgx as PostgreSQL driver
+* hashicorp/go-memdb as in-memory database to store the common used values
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+Application endpoints:
+* To get a block (get): /api/v1/block/network_code/block_hash
+* To get a transaction (get): /api/v1/tx/network_code/transaction_id
+* To reload in-memory database (post): /api/v1/admin/memdb/reload
 
-Use the `BLANK_README.md` to get started. 
+Missing things:
+Unit testing artifacts
+Modular testing using Postman or Katalon
+In-memory caching for blocks and transactions calls using allegro/bigcache
