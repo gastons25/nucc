@@ -1,7 +1,5 @@
 # Gaston Sanchez - Coding Challenge
 
-## About the solution
-
 The application implementation uses the following libraries:
 * gofiber/fiber as a web framework
 * jackc/pgx as PostgreSQL driver
