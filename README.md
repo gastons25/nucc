@@ -7,10 +7,12 @@ The application implementation uses the following libraries:
 * jackc/pgx as PostgreSQL driver
 * hashicorp/go-memdb as in-memory database to store the common used values
 
+
 Application endpoints:
 * To get a block (get): /api/v1/block/network_code/block_hash
 * To get a transaction (get): /api/v1/tx/network_code/transaction_id
 * To reload in-memory database (post): /api/v1/admin/memdb/reload
+
 
 Missing things:
 * Unit testing artifacts
